@@ -59,6 +59,14 @@ async def leave(ctx):
 @bot.command(pass_context=True)
 async def when(ctx):
     await broadcast(ctx.message.channel)
+    
+@bot.command(pass_context=True)
+async def rate(ctx, arg):
+    ratee = arg
+    rndNum = random()*10
+    math.floor(rndNum)
+    reply = ratee + " is a " + rndNum + "/10"
+    await bot.send_message(chan,reply)
 
 def broadcast(chan):
     date = 'Friday at 7pm.'
@@ -66,7 +74,7 @@ def broadcast(chan):
     msg += 'The following souls have surrendered themselves to it:\n'
     for player in data['players']:
         msg+= player.split('#')[0] + "\n"
-    msg+='\nTo sign yourself up, simply enter "!join"'
+    msg+='\nTo sign yourself up, simply enter "!join". To leave, enter "!leave".'
     return bot.send_message(chan,msg)
 
 async def on_time():
